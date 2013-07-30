@@ -117,6 +117,7 @@ static zval *entry2array(struct entry *e, php_couchbase_res *res)
 	zval *r;
 	MAKE_STD_ZVAL(r);
 	array_init(r);
+	TSRMLS_FETCH();
 
 	if (e->error == LCB_SUCCESS) {
 		char cas[30];
@@ -162,6 +163,7 @@ void php_couchbase_get_replica_impl(INTERNAL_FUNCTION_PARAMETERS)
 	lcb_get_replica_cmd_t **commands;
 	lcb_get_callback old;
 	struct response cookie;
+	TSRMLS_FETCH();
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z|z",
 							  &ids, &strategy_spec) != SUCCESS) {
